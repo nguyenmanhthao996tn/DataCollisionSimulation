@@ -13,12 +13,12 @@ class SimpleVersion {
 
             int numberOfPacket = Integer.parseInt(args[0]);
             int timeOnAir = Integer.parseInt(args[1]);
-            int transmissionErrorTime = Integer.parseInt(args[2]);
+            int transmissionErrorTime = Integer.parseInt(args[2]) + 1;
             int maximumOfRandomDelayTime = Integer.parseInt(args[3]);
             int numberOfNode = Integer.parseInt(args[4]);
             int timeSlotLength = Integer.parseInt(args[5]);
-            int timerError = Integer.parseInt(args[6]);
-            int timerDiffence = Integer.parseInt(args[7]);
+            int timerError = Integer.parseInt(args[6]) + 1;
+            int timerDiffence = Integer.parseInt(args[7]) + 1;
             int gatewayProcessingTime = Integer.parseInt(args[8]);
 
             // Process
@@ -56,8 +56,20 @@ class SimpleVersion {
                         + Tgateway_receive_packet + "|" + Tgateway_send_ack + "|" + Tnode_receive_ack + "|"
                         + result1;
 
+                        String output2 = "{\"packetIndex\":" + packetIndex + "," + 
+                        "\"Tstart_node\":" + Tstart_node + "," + 
+                        "\"Tstart_gateway\":" + Tstart_gateway + "," + 
+                        "\"Tstop_node\":" + Tstop_node + "," + 
+                        "\"Tstop_gateway\":" + Tstop_gateway + "," + 
+                        "\"Tnode_send_packet\":" + Tnode_send_packet + "," + 
+                        "\"Tgateway_listen\":" + Tgateway_listen + "," + 
+                        "\"Tgateway_receive_packet\":" + Tgateway_receive_packet + "," + 
+                        "\"Tgateway_send_ack\":" + Tgateway_send_ack + "," + 
+                        "\"Tnode_receive_ack\":" + Tnode_receive_ack + "," + 
+                        "\"result1\":" + result1 + "}";
+
                 System.out.println(output);
-                writer.println(output);
+                writer.println(output2);
 
                 Tstart_node_next = Tstop_node + (new Random()).nextInt(timerError);
                 Tstart_gateway_next = Tstop_gateway + (new Random()).nextInt(timerError);
